@@ -32,14 +32,14 @@ for module in required_modules:
     try:
         __import__(module)
     except ImportError:
-        print(f"{C.S} Installing {C.E} {C.OG}➸❥ {C.G}{module}...\n")
+        print(f"{C.S} กำลังติดตั้ง {C.E} {C.OG}-> {C.G}{module}...\n")
         try:
             M.subprocess.check_call([M.sys.executable, "-m", "pip", "install", module])
             Clear()
         except (M.subprocess.CalledProcessError, Exception):
             exit(
-                f"\n{C.ERROR} No Internet Connection.  ✘\n"
-                f"\n{C.INFO} Internet Connection is Required to Install {C.G} pip install {module}\n"
+                f"\n{C.ERROR} ไม่มีการเชื่อมต่ออินเทอร์เน็ต  ✘\n"
+                f"\n{C.INFO} จำเป็นต้องใช้อินเทอร์เน็ตในการติดตั้ง โมดูลด้วยคำสั่ง: {C.G} pip install {module}\n"
             )
 
 
@@ -52,9 +52,9 @@ def check_dependencies():
             install_package('openjdk-17')
         else:
             exit(
-                f'\n\n{C.ERROR} Java is not installed on Your System.  ✘\n'
-                f'\n{C.INFO} Install Java & Run Script Again in New CMD.  ✘\n'
-                f'\n{C.INFO} Verify Java Installation {C.G} java --version\n'
+                f'\n\n{C.ERROR} ตรวจไม่พบ Java ในระบบของคุณ  ✘\n'
+                f'\n{C.INFO} กรุณาติดตั้ง Java และรันสคริปต์นี้อีกครั้งในหน้าต่าง CMD ใหม่  ✘\n'
+                f'\n{C.INFO} ตรวจสอบการติดตั้ง Java ด้วยคำสั่ง: {C.G} java --version\n'
             )
 
     if M.os.name == 'posix': install_package('aapt')
@@ -65,13 +65,13 @@ def install_package(pkg):
     try:
         result = M.subprocess.run(['pkg', 'list-installed'], stdout=M.subprocess.PIPE, stderr=M.subprocess.PIPE, text=True)
         if pkg not in result.stdout:
-            print(f"{C.S} Installing {C.E} {C.OG}➸❥ {C.G}{pkg}...\n")
+            print(f"{C.S} กำลังติดตั้ง {C.E} {C.OG}-> {C.G}{pkg}...\n")
             M.subprocess.check_call(['pkg', 'install', '-y', pkg])
             Clear()
     except (M.subprocess.CalledProcessError, Exception):
         exit(
-            f"\n\n{C.ERROR} No Internet Connection.  ✘\n"
-            f"\n{C.INFO} Internet Connection is Required to Installation  {C.G}pkg install {pkg}\n"
+            f"\n\n{C.ERROR} ไม่มีการเชื่อมต่ออินเทอร์เน็ต  ✘\n"
+            f"\n{C.INFO} จำเป็นต้องใช้อินเทอร์เน็ตในการติดตั้งแพ็กเกจด้วยคำสั่ง: {C.G}pkg install {pkg}\n"
         )
 
 check_dependencies()
@@ -128,15 +128,15 @@ def RK_Techno_IND():
 
     if not M.os.path.isfile(apk_path):
         exit(
-            f"\n{C.ERROR} APK file '{apk_path}' not found.  ✘\n\n"
-            f"\n{C.FYI}{C.G} Make Sure There Is 'No Extra Space' In The Folder/Apk Name In The Input Text. If Yes, Then Remove Extra Space & Correct It By Renaming It.\n"
+            f"\n{C.ERROR} ไม่พบไฟล์ APK '{apk_path}'  ✘\n\n"
+            f"\n{C.FYI}{C.G} ตรวจสอบให้แน่ใจว่า 'ไม่มีการเว้นวรรคเกิน' ในชื่อโฟลเดอร์หรือไฟล์ APK ที่ระบุ ถ้ามีให้ลบช่องว่างออกหรือเปลี่ยนชื่อให้ถูกต้อง\n"
         )
     
     if args.CA_Certificate:
         isCert = [Cert for Cert in args.CA_Certificate if not M.os.path.isfile(Cert)]
 
         if isCert:
-            exit(f"\n{C.ERROR} Not exist: {', '.join(isCert)}\n")
+            exit(f"\n{C.ERROR} ไฟล์ไม่มีอยู่จริง: {', '.join(isCert)}\n")
 
     apk_path = Anti_Split(apk_path, args.Merge, isCoreX)
 
@@ -151,7 +151,7 @@ def RK_Techno_IND():
 
     if M.os.name == 'posix':
         M.subprocess.run(['termux-wake-lock'])
-        print(f"\n{C.X}{C.C} Acquiring Wake Lock...\r")
+        print(f"\n{C.X}{C.C} กำลังขอสิทธิ์ Wake Lock (ป้องกันเครื่องหลับ)...\r")
 
     start_time = M.time.time()
 
@@ -224,18 +224,18 @@ def RK_Techno_IND():
         Sign_APK(build_dir)
 
     if M.os.path.exists(build_dir):
-        print(f'{C.S} Final APK {C.E} {C.G}︻デ═一 {C.Y}{build_dir} {C.G} ✔')
+        print(f'{C.S} ไฟล์ APK สุดท้าย {C.E} {C.G}︻デ═一 {C.Y}{build_dir} {C.G} ✔')
 
     print(f"\n{C.CC}{'_' * 61}\n")
 
     if not isCoreX and isPairip and isPairip_lib:
-        print(f'\n{C.FYI}{C.C} This is Pairip Apk So U Install {C.G}( Keep Apk Without Sign ) {C.C}in VM / Multi_App\n')
+        print(f'\n{C.FYI}{C.C} นี่คือไฟล์ Pairip APK แนะนำให้ติดตั้งแบบไม่เซ็นชื่อ (Keep APK Without Sign) ใน VM / Multi_App\n')
 
-    print(f'\n{C.S} Time Spent {C.E} {C.G}︻デ═一 {C.PN}{M.time.time() - start_time:.2f} {C.CC}Seconds {C.G} ✔\n')
+    print(f'\n{C.S} เวลาที่ใช้ไป {C.E} {C.G}︻デ═一 {C.PN}{M.time.time() - start_time:.2f} {C.CC}วินาที {C.G} ✔\n')
 
     print(f'\n🚩 {C.CC}࿗ {C.OG}Jai Shree Ram {C.CC}࿗ 🚩\n     🛕🛕🙏🙏🙏🛕🛕\n')
 
     if M.os.name == 'posix':
         M.subprocess.run(['termux-wake-unlock'])
-        exit(f"\n{C.X}{C.C} Releasing Wake Lock...\n")
+        exit(f"\n{C.X}{C.C} กำลังคืนสิทธิ์ Wake Lock...\n")
     exit(0)

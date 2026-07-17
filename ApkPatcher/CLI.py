@@ -19,22 +19,22 @@ class CustomArgumentParser(M.argparse.ArgumentParser):
             if action.option_strings and any(option in message for option in action.option_strings):
                 if action.dest == 'input':
                     suggestion = (
-                        f'\n{C.FYI}{C.G} Make Sure There Is "No Extra Space" In The Folder / APK Name In The Input Text. If Yes, Then Remove Extra Space & Correct It By Renaming It.\n\n'
-                        f'\n{C.INFO} With Your Certificate Flag: {C.OG}-c {C.P}( Input Your pem/crt/cert Path ){EX}-c {C.Y}certificate.cert\n\n'
-                        f'\n{C.INFO} If you are using an Emulator in PC Then Use Flag: {C.OG}-e{EX}-c {C.Y}certificate.cert {C.OG}-e\n'
+                        f'\n{C.FYI}{C.G} ตรวจสอบให้แน่ใจว่า "ไม่มีการเว้นวรรคเกิน" ในชื่อโฟลเดอร์หรือไฟล์ APK ที่ระบุในข้อความนำเข้า หากมี ให้ลบช่องว่างออกหรือตั้งชื่อใหม่ให้ถูกต้อง\n\n'
+                        f'\n{C.INFO} การใช้พารามิเตอร์ใบรับรอง (Certificate Flag): {C.OG}-c {C.P}( ระบุพาธไฟล์ pem/crt/cert ){EX}-c {C.Y}certificate.cert\n\n'
+                        f'\n{C.INFO} หากคุณกำลังใช้งานบนโปรแกรมจำลอง (Emulator) ในคอมพิวเตอร์ ให้ใช้พารามิเตอร์: {C.OG}-e{EX}-c {C.Y}certificate.cert {C.OG}-e\n'
                     )
 
                 elif action.dest == 'Merge':
                     suggestion = (
-                        f'\n{C.INFO} Only Merge APK\n\n'
-                        f'\n{C.INFO} Merge Extension {C.Y}( .apks/.xapk/.apkm )'
+                        f'\n{C.INFO} สำหรับการรวมไฟล์ APK (Merge) เท่านั้น\n\n'
+                        f'\n{C.INFO} นามสกุลไฟล์ที่รองรับสำหรับการรวมไฟล์ {C.Y}( .apks/.xapk/.apkm )'
                         f'\n{FE}{C.OG} -m {C.G}Your_Apk_Path.apks\n'
                     )
 
                 break
 
         exit(
-            f'\n{C.ERROR} {message}\n'
+            f'\n{C.ERROR} ข้อผิดพลาด: {message}\n'
             f'\n{suggestion}'
         )
 
@@ -43,95 +43,95 @@ class CustomArgumentParser(M.argparse.ArgumentParser):
 
         super().print_help()
 
-        print(f"\n{C.INFO} ApkPatcher Default Patch is VPN & SSL Bypass, Show Other Patch Flags List with: {C.G}ApkPatcher -O{C.C}\n")
+        print(f"\n{C.INFO} แพตช์เริ่มต้นของ ApkPatcher คือการบายพาส VPN & SSL หากต้องการดูรายการพารามิเตอร์แพตช์อื่นๆ ให้ใช้คำสั่ง: {C.G}ApkPatcher -O{C.C}\n")
 
     # ---------------- Other Patch ----------------
     def Other_Patch(self):
         print(
-            f"""\n{C.X}{C.C} Other Patch Flags Help ( Keep Sequence in Mind )
+            f"""\n{C.X}{C.C} คำแนะนำการใช้งานพารามิเตอร์แพตช์อื่นๆ (กรุณาเรียงลำดับพารามิเตอร์ให้ถูกต้อง)
 
- <Flags>                 {C.G}─•❀•❀ {C.C}Info Patch {C.G}❀•❀•─ {C.OG}
+ <พารามิเตอร์>                 {C.G}─•❀•❀ {C.C}ข้อมูลการแพตช์ {C.G}❀•❀•─ {C.OG}
 
-  -A, {C.C}--AES_Logs        {C.Y} ➸ {C.G}AES Logs Inject {C.OG}
-  -A2, {C.C}--Algorithm      {C.Y} ➸ {C.G}Algorithm Logs Inject {C.OG}
-  -D, {C.C}--Android_ID      {C.Y} ➸ {C.G}Hook Android ID for One Device Login Bypass {C.OG}
-  -f, {C.C}--Flutter         {C.Y} ➸ {C.G}Flutter SSL Bypass {C.OG}
-  -l, {C.C}--Load_Modules    {C.Y} ➸ {C.G}Path of Xposed & LSP Module {C.P}( Currently Not Supported XSharedPreferences Module ) {C.OG}
-  -p, {C.C}--Pairip          {C.Y} ➸ {C.G}Pairip CERT SSL Bypass {C.OG}
-  -P, {C.C}--Purchase        {C.Y} ➸ {C.G}Purchase / Paid / Price {C.OG}
-  -r, {C.C}--Random_Info     {C.Y} ➸ {C.G}Fake Device Info {C.OG}
-  -rmads, {C.C}--Remove_Ads  {C.Y} ➸ {C.G}Bypass Ads {C.OG}
-  -rmss, {C.C}--Remove_SS    {C.Y} ➸ {C.G}Bypass Screenshot Restriction {C.OG}
-  -rmusb, {C.C}--Remove_USB  {C.Y} ➸ {C.G}Bypass USB Debugging {C.OG}
-  -pkg, {C.C}--Spoof_PKG     {C.Y} ➸ {C.G}Spoof Package Detection {C.OG}
-  -pine, {C.C}--Pine_Hook    {C.Y} ➸ {C.G}Pine Hook {C.OG}
-  -skip {C.C}[Skip_Patch ...]{C.Y} ➸ {C.G}Skip Specific Patches {C.P}( e.g. getAcceptedIssuers ) {C.OG}
-  -s, {C.C}--AES_S           {C.Y} ➸ {C.G}Do U Want Separate AES.smali Dex {C.OG}
-  -t, {C.C}--TG_Patch        {C.Y} ➸ {C.G}Telegram / Plus Patcher {C.OG}
-  -x, {C.C}--Hook_CoreX      {C.Y} ➸ {C.G}Hook CoreX Flag: {C.OG}-p -x {C.P}( Only For [ arm64 ] )"""
+  -A, {C.C}--AES_Logs        {C.Y} -> {C.G}ฝังการบันทึกบันทึก AES (AES Logs Inject) {C.OG}
+  -A2, {C.C}--Algorithm      {C.Y} -> {C.G}ฝังการบันทึกบันทึกอัลกอริทึม (Algorithm Logs Inject) {C.OG}
+  -D, {C.C}--Android_ID      {C.Y} -> {C.G}ฮุก Android ID เพื่อบายพาสการล็อกอินหนึ่งเครื่องต่อหนึ่งบัญชี {C.OG}
+  -f, {C.C}--Flutter         {C.Y} -> {C.G}บายพาส Flutter SSL {C.OG}
+  -l, {C.C}--Load_Modules    {C.Y} -> {C.G}พาธของโมดูล Xposed & LSP {C.P}( ปัจจุบันยังไม่รองรับโมดูล XSharedPreferences ) {C.OG}
+  -p, {C.C}--Pairip          {C.Y} -> {C.G}บายพาส Pairip CERT SSL {C.OG}
+  -P, {C.C}--Purchase        {C.Y} -> {C.G}บายพาสการซื้ออินแอป / ระบบชำระเงิน / ราคา {C.OG}
+  -r, {C.C}--Random_Info     {C.Y} -> {C.G}จำลองข้อมูลอุปกรณ์ (ปลอมรุ่นมือถือ) {C.OG}
+  -rmads, {C.C}--Remove_Ads  {C.Y} -> {C.G}บายพาสและโฆษณาออก {C.OG}
+  -rmss, {C.C}--Remove_SS    {C.Y} -> {C.G}บายพาสการจำกัดการจับภาพหน้าจอ {C.OG}
+  -rmusb, {C.C}--Remove_USB  {C.Y} -> {C.G}บายพาสการตรวจจับการดีบัก USB {C.OG}
+  -pkg, {C.C}--Spoof_PKG     {C.Y} -> {C.G}ปลอมแปลงการตรวจจับชื่อแพ็กเกจ (Spoof Package) {C.OG}
+  -pine, {C.C}--Pine_Hook    {C.Y} -> {C.G}การฮุกด้วย Pine Hook {C.OG}
+  -skip {C.C}[Skip_Patch ...]{C.Y} -> {C.G}ข้ามขั้นตอนการแพตช์ที่ระบุ {C.P}( เช่น getAcceptedIssuers ) {C.OG}
+  -s, {C.C}--AES_S           {C.Y} -> {C.G}คุณต้องการแยกไฟล์ AES.smali Dex ออกมาต่างหากหรือไม่ {C.OG}
+  -t, {C.C}--TG_Patch        {C.Y} -> {C.G}แพตช์สำหรับ Telegram / Plus Patcher {C.OG}
+  -x, {C.C}--Hook_CoreX      {C.Y} -> {C.G}พารามิเตอร์ฮุก CoreX: {C.OG}-p -x {C.P}( รองรับเฉพาะ [ arm64 ] เท่านั้น )"""
         )
 
-        user_input = input(f"\n\n{C.B}[ {C.P}* {C.B}] {C.C} Do See Example\n{C.G}  |\n  └──── {C.CC}~ y / Exit to Enter {C.G}$ : {C.Y}")
+        user_input = input(f"\n\n{C.B}[ {C.P}* {C.B}] {C.C} ต้องการดูตัวอย่างการใช้งานหรือไม่?\n{C.G}  |\n  └──── {C.CC}~ พิมพ์ y เพื่อดู / หรือกด Enter เพื่อออก {C.G}$ : {C.Y}")
 
         if user_input.lower() == "y":
             print(
                 f"""\n{Tag.replace("Tag", "AES Logs Inject")}
 
-{C.INFO} AES MT Logs Inject Flag: {C.OG}-A{EX}-A
+{C.INFO} พารามิเตอร์ฝังบันทึกบันทึก AES MT Logs: {C.OG}-A{EX}-A
 
 
-{C.INFO} Do U Want Separate AES.smali Dex Use Flag: {C.OG}-A -s{EX}-A -s
+{C.INFO} หากต้องการแยกไฟล์ AES.smali Dex ให้ใช้พารามิเตอร์: {C.OG}-A -s{EX}-A -s
 
 
-{C.INFO} Algorithm Logs Inject Flag: {C.OG}-A2{EX}-A2
+{C.INFO} พารามิเตอร์ฝังบันทึกบันทึกอัลกอริทึม: {C.OG}-A2{EX}-A2
 
 {Tag.replace("Tag", "Hook Android ID")}
 
-{C.INFO} Hook Android ID For One Device Login Bypass Use Flag: {C.OG}-D {C.P}( Input Your Original 16 Digit Android ID ){EX}-D {C.Y}7e9f51f096bd5c83
+{C.INFO} ฮุก Android ID เพื่อบายพาสการล็อกอินจำกัดอุปกรณ์ ให้ใช้พารามิเตอร์: {C.OG}-D {C.P}( ใส่เลข Android ID 16 หลักของเครื่องคุณ ){EX}-D {C.Y}7e9f51f096bd5c83
 
 {Tag.replace("Tag", "isFlutter / isPairip")}
 
-{C.INFO} If APK is Flutter Then Use Additional Flag: {C.OG}-f{EX}-f
+{C.INFO} หากไฟล์ APK เป็น Flutter ให้ใช้พารามิเตอร์เพิ่มเติม: {C.OG}-f{EX}-f
 
 
-{C.INFO} If APK is Pairip Then Use Additional Flag: {C.OG}-p {C.P}( Without Sign APK Use Only in VM / Multi_App ){EX}-p
+{C.INFO} หากไฟล์ APK เป็น Pairip ให้ใช้พารามิเตอร์เพิ่มเติม: {C.OG}-p {C.P}( ไฟล์ APK ที่ได้จะไม่เซ็นชื่อ ต้องติดตั้งใน VM / Multi_App เท่านั้น ){EX}-p
 
 
-{C.INFO} If APK is Pairip Then Hook CoreX Use Additional Flag: {C.OG}-p -x {C.P}( Install Directly Only For [ arm64 ] ){EX}-p -x
+{C.INFO} หากไฟล์ APK เป็น Pairip และต้องการฮุก CoreX ให้ใช้พารามิเตอร์เพิ่มเติม: {C.OG}-p -x {C.P}( ติดตั้งได้โดยตรง รองรับเฉพาะ [ arm64 ] ){EX}-p -x
 
 {Tag.replace("Tag", "Spoof PKG / Device Info")}
 
-{C.INFO} Spoof Package Detection Flag: {C.OG}-pkg {C.P}( Dex / Manifest / Res ){EX}-pkg
+{C.INFO} พารามิเตอร์ปลอมแปลงชื่อแพ็กเกจ (Spoof Package): {C.OG}-pkg {C.P}( Dex / Manifest / Res ){EX}-pkg
 
-{C.INFO} Fake Device Info Flag: {C.OG}-r{EX}-r
+{C.INFO} พารามิเตอร์จำลองข้อมูลอุปกรณ์: {C.OG}-r{EX}-r
 
 
-{C.INFO} With Your Android ID Flag: {C.OG}-r -D {C.P}( Input Your Custom 16 Digit Android ID ){EX}-r -D {C.Y}7e9f51f096bd5c83
+{C.INFO} ใช้งานร่วมกับพารามิเตอร์ Android ID: {C.OG}-r -D {C.P}( กำหนดเลข Android ID 16 หลักของคุณเอง ){EX}-r -D {C.Y}7e9f51f096bd5c83
 
 {Tag.replace("Tag", "Pine Hook")}
 
-{C.INFO} Pine Hook Flag: {C.OG}-pine -l {C.P}( Input Path of Xposed & LSP Module ){EX}-pine -l {C.Y}NoVPNDetect.apk just.trust.me.apk
+{C.INFO} พารามิเตอร์ Pine Hook: {C.OG}-pine -l {C.P}( ระบุพาธไฟล์โมดูล Xposed หรือ LSP ){EX}-pine -l {C.Y}NoVPNDetect.apk just.trust.me.apk
 
 {Tag.replace("Tag", "Bypass Ads / SS / USB")}
 
-{C.INFO} Bypass Ads Flag: {C.OG}-rmads{EX}-rmads
+{C.INFO} พารามิเตอร์ข้ามโฆษณา (Bypass Ads): {C.OG}-rmads{EX}-rmads
 
 
-{C.INFO} Bypass Screenshot Restriction Flag: {C.OG}-rmss{EX}-rmss
+{C.INFO} พารามิเตอร์ปลดล็อกการจำกัดจับภาพหน้าจอ: {C.OG}-rmss{EX}-rmss
 
 
-{C.INFO} Bypass USB Debugging Flag: {C.OG}-rmusb{EX}-rmusb
+{C.INFO} พารามิเตอร์บายพาสการตรวจจับดีบัก USB: {C.OG}-rmusb{EX}-rmusb
 
 {Tag.replace("Tag", "isPurchase / Skip Patch")}
 
-{C.INFO} Purchase / Paid / Price Flag: {C.OG}-P{EX}-P
+{C.INFO} พารามิเตอร์บายพาสระบบซื้อของในแอป (Purchase / Paid / Price): {C.OG}-P{EX}-P
 
 
-{C.INFO} Skip Patch Flag: {C.OG}-skip{EX}-skip {C.Y}getAcceptedIssuers
+{C.INFO} พารามิเตอร์ข้ามการแพตช์เฉพาะจุด: {C.OG}-skip{EX}-skip {C.Y}getAcceptedIssuers
 
 {Tag.replace("Tag", "Telegram / Plus Patch")}
 
-{C.INFO} Telegram / Plus Patch Flag: {C.OG}-t{EX}-t\n"""
+{C.INFO} พารามิเตอร์สำหรับแพตช์ Telegram / Plus: {C.OG}-t{EX}-t\n"""
             )
 
         else:
@@ -147,7 +147,7 @@ def parse_arguments():
         exit(CustomArgumentParser().Other_Patch())
 
     if any(arg.startswith('-') for arg in args):
-        parser = CustomArgumentParser(description=f'{C.C}ApkPatcher v{__version__}')
+        parser = CustomArgumentParser(description=f'{C.C}ApkPatcher เวอร์ชัน v{__version__}')
     else:
         parser = M.argparse.ArgumentParser()
 
@@ -156,36 +156,36 @@ def parse_arguments():
     group.add_argument(
         '-i',
         dest='input',
-        help=f'{C.Y}➸{C.G} Input APK Path...{C.C}'
+        help=f'{C.Y}->{C.G} ระบุพาธไฟล์ APK ขาเข้า...{C.C}'
     )
 
     group.add_argument(
         '-m',
         dest='Merge',
-        help=f'{C.Y}➸{C.G} Anti-Split ( Only Merge APK ){C.C}'
+        help=f'{C.Y}->{C.G} Anti-Split (สำหรับการรวมไฟล์ APK เท่านั้น){C.C}'
     )
 
     group.add_argument(
         '-C',
         dest='Credits',
         action='store_true',
-        help=f'{C.Y}➸{C.G} Show Credits{C.C}'
+        help=f'{C.Y}->{C.G} แสดงเครดิตผู้พัฒนา{C.C}'
     )
 
-    additional = parser.add_argument_group(f'{C.OG}[ * ] Additional Flags{C.C}')
+    additional = parser.add_argument_group(f'{C.OG}[ * ] พารามิเตอร์เพิ่มเติม (Additional Flags){C.C}')
 
     additional.add_argument(
         '-a',
         '--APKEditor',
         action='store_true',
-        help=f'{C.Y}➸ {C.G}APKEditor ( Default APKTool ){C.C}'
+        help=f'{C.Y}-> {C.G}ใช้งาน APKEditor (ค่าเริ่มต้นจะเป็น APKTool){C.C}'
     )
 
     additional.add_argument(
         '-e',
         '--For_Emulator',
         action='store_true',
-        help=f'{C.Y}➸{C.G} If using emulator on PC then use -e flag{C.C}'
+        help=f'{C.Y}->{C.G} หากใช้งานบนโปรแกรมจำลอง (Emulator) ในคอมพิวเตอร์ ให้เปิดใช้งานพารามิเตอร์ -e{C.C}'
     )
 
     additional.add_argument(
@@ -193,14 +193,14 @@ def parse_arguments():
         dest='CA_Certificate',
         type=str,
         nargs='*',
-        help=f"{C.Y}➸{C.G} Input Your HttpCanary / Reqable / ProxyPin etc. Capture APK's CA-Certificate{C.C}"
+        help=f"{C.Y}->{C.G} ระบุไฟล์ CA-Certificate ของแอปดักจับแพ็กเก็ต เช่น HttpCanary / Reqable / ProxyPin เป็นต้น{C.C}"
     )
 
     additional.add_argument(
         '-u',
         dest='unsigned_apk',
         action='store_true',
-        help=f"{C.Y}➸{C.G} Keep Unsigned APK{C.C}"
+        help=f"{C.Y}->{C.G} คงสถานะไฟล์ APK แบบไม่เซ็นชื่อ (Unsigned){C.C}"
     )
 
 
@@ -341,8 +341,8 @@ def parse_arguments():
 
 
     if not Valid_Ext and M.sys.argv[1:2] != ['-C']:
-        print(f"\n{C.X}{C.C} Only Supported Extensions {C.G}{Ext}\n")
+        print(f"\n{C.X}{C.C} รองรับเฉพาะไฟล์นามสกุลต่อไปนี้เท่านั้น: {C.G}{Ext}\n")
 
-    print(f"\n{C.S} Input Path {C.E} {C.OG}➸❥{C.Y}", *fixed, f"{C.CC}\n")
+    print(f"\n{C.S} พาธนำเข้า (Input Path) {C.E} {C.OG}->❥{C.Y}", *fixed, f"{C.CC}\n")
 
     return parser.parse_args(fixed)
