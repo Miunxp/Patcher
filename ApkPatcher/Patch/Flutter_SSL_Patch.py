@@ -118,7 +118,7 @@ def Patch_Flutter_SSL(decompile_dir, isAPKEditor):
             break
 
     if lib_so_path:
-        print(f"\n{C.S} Found {C.E} {C.OG}➸❥ {C.Y}{arch}/{M.os.path.basename(lib_so_path)} {C.G} ✔\n")
+        print(f"\n{C.S} Found {C.E} {C.OG}-> {C.Y}{arch}/{M.os.path.basename(lib_so_path)} {C.G} ✔\n")
 
         # ---------------- Detect Flutter Dart Version ----------------
         with open(lib_so_path, "rb") as so_file:
@@ -138,7 +138,7 @@ def Patch_Flutter_SSL(decompile_dir, isAPKEditor):
             else:
                 version_code = "Unknown"
 
-            print(f"\n{C.S} Flutter Dart Version {C.E} {C.OG}➸❥  {C.PN}{version_code}  {C.G}✔\n")
+            print(f"\n{C.S} Flutter Dart Version {C.E} {C.OG}->  {C.PN}{version_code}  {C.G}✔\n")
 
     else:
         exit(f"\n{C.ERROR} libflutter.so not found in any of the specified architectures {architectures}\n")

@@ -28,7 +28,7 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock, isPKG, isCoreX):
                     with Lock:
                         Count.value += 1
 
-                        print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count.value}", end='', flush=True)
+                        print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count.value}", end='', flush=True)
 
                 except Exception:
                     return None
@@ -36,17 +36,9 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock, isPKG, isCoreX):
             else:
                 Count[0] += 1
 
-                print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count[0]}", end='', flush=True)
+                print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count[0]}", end='', flush=True)
 
             return Smali_Path
-
-    # ---------------- For String Scan ( Without Regex ) ----------------
-    #for String in Target_String:
-        #if String in Smali:
-            #with Lock:
-                #Count.value += 1
-                #print(f"\r[ Find Target Smali ] ➸❥ {Count.value}", end='', flush=True)
-            #return Smali_Path
 
 
 # ---------------- Apply Smali_Patch ----------------
@@ -59,29 +51,29 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
         (
             r'(const/4 [pv]\d+, 0x4[^>]*?invoke-\w+ \{[^\}]*\}, Landroid/net/NetworkCapabilities;->hasTransport\(I\)Z[^>]*?)move-result ([pv]\d+)',
             r'\1const/4 \2, 0x0',
-            "Bypassed Vpn/Proxy Detection NetworkCapabilities hasTransport"
+            "ข้ามระบบตรวจจับ Vpn/Proxy ผ่าน NetworkCapabilities hasTransport"
         ),
         (
             r'(Ljava/net/NetworkInterface;->(?:isUp|isVirtual|isLoopback)\(\)Z[^>]*?)move-result ([pv]\d+)',
             r'\1const/4 \2, 0x0',
-            "Bypassed Vpn/Proxy Detection NetworkInterface isUp"
+            "ข้ามระบบตรวจจับ Vpn/Proxy ผ่าน NetworkInterface isUp"
         ),
         (
             r'(const-string [pv]\d+, "(tun|tunl0|tun0|utun0|utun1|utun2|utun3|utun4|pptp|ppp|pp0|ppp0|p2p0|ccmni0|ipsec)"[^>]*?invoke-\w+ \{[^\}]*\}, L[^\(]+;->\S+\(Ljava/lang/CharSequence;\)Z[^>]*?)move-result ([pv]\d+)',
             r'\1const/4 \3, 0x0',
-            "Bypassed Vpn/Proxy Detection NetworkInterface"
+            "ข้ามระบบตรวจจับ Vpn/Proxy บน NetworkInterface"
         ),
 
         # ---------------- Mock Location & Update & Pkg Install Fixed ----------------
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/location/Location;->(?:isFromMockProvider|isMock)\(\)Z[^>]*?)move-result ([pv]\d+)',
             r'\1const/4 \2, 0x0',
-            "Bypassed Mock Detection"
+            "ข้ามระบบตรวจจับตำแหน่งจำลอง (Mock Detection)"
         ),
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/content/pm/PackageManager;->getInstallerPackageName\(Ljava/lang/String;\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             r'\1const-string \2, "com.android.vending"',
-            "Fixed Installer"
+            "แก้ไขตัวติดตั้งระบบ (Installer)"
         ),
 
         # ---------------- SSL BYPASS ( MITM ) ----------------
@@ -90,7 +82,7 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
             r'\1\n'
             r'    const v0, 0x1\n'
             r'    return v0\2',
-            "Verify SSLSession & X509Certificate"
+            "ยืนยันสิทธิ์ SSLSession & X509Certificate"
         ),
         (
             r'(\.method [^(]*checkServerTrusted\([^\)]*Ljava/security/cert/X509Certificate;[^\)]*\)Ljava/util/List;\s+.locals \d+)[\s\S]*?(\n.end method)',
@@ -152,14 +144,6 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
         )
     ]
 
-    # if CA_Cert:
-        # sha1, sha256 = P().Hash(CA_Cert[0])
-        # ---------------- SHA-256 & SHA-1 ----------------
-        # patterns.extend([
-            # (r'(\.method [^(]*\S+\((?:Ljava/security/cert/X509Certificate;|[^)]*)\)Ljava/lang/String;\s+.locals \d+)(?:(?!\.end\smethod)[\s\S])*?"sha256/[^"]*"(?:(?!\.end\smethod)[\s\S])*?(([pv]\d+)\n.end method)', fr'\1\n\tconst-string \3, "sha256/{sha256}"\n\treturn-object \2', f"SHA-256 ➸❥ {C.OG}{sha256}"),
-            # (r'(\.method public [^(]*\S+\((?:Ljava/security/cert/X509Certificate;|[^)]*)\)Ljava/lang/String;\s+.*\s+)(?:(?!\.end\smethod)[\s\S])*?"sha1/[^"]*"(?:(?!\.end\smethod)[\s\S])*?(([pv]\d+)\n.end method)', fr'\1\n\tconst-string \3, "sha1/{sha1}"\n\treturn-object \2', f"SHA-1 ➸❥ {C.OG}{sha1}")
-        # ])
-
 
     # ---------------- Custom Device ID ----------------
     if isID:
@@ -167,7 +151,7 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
             (
                 r'(const-string [pv]\d+, "android_id"[^>]*?invoke-static \{[^\}]*\}, Landroid/provider/Settings\$Secure;->getString\(Landroid/content/ContentResolver;Ljava/lang/String;\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
                 rf'\1const-string \2, "{isID}"',
-                f"Custom Android ID ➸❥ {C.OG}{isID}"
+                f"กำหนดรหัส Android ID เอง -> {C.OG}{isID}"
             )
         )
 
@@ -203,24 +187,24 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                 (
                     r'invoke-static \{[^\}]*\}, (?:Ljava/lang/System;->exit|Landroid/os/Process;->killProcess)\(I\)V',
                     'nop',
-                    "Blocked System.exit & Process.killProcess"
+                    "ระงับคำสั่ง System.exit และ Process.killProcess"
                 ),
 
                 # ---------------- Xposed Bypass & Frida Bypass ----------------
                 (
                     r'(const-string [pv]\d+, )"de.robv.android.xposed',
                     r'\1"com.Fuck.U',
-                    "Bypassed Xposed Detection"
+                    "ข้ามระบบตรวจจับ Xposed"
                 ),
                 (
                     r'const-string [pv]\d+, "(generic|goldfish)"[^>]*?invoke-static \{[^\}]*\}, Landroid/os/Build;->get(Device|Hardware)\(\)Ljava/lang/String;[^>]*?move-result-object [pv]\d+[^>]*?invoke-virtual \{[^\}]*\}, Ljava/lang/String;->contains\(Ljava/lang/CharSequence;\)Z[^>]*move-result ([pv]\d+)',
                     r'const/4 \3, 0x0',
-                    "Bypassed Device detection"
+                    "ข้ามระบบตรวจจับอุปกรณ์ (Device detection)"
                  ),
                 (
                     r'const-string [pv]\d+, "/data/local/tmp/(?:frida|frida-server)"[^>]*?invoke-static \{[^\}]*\}, Ljava/io/File;->exists\(\)Z[^>]*?move-result ([pv]\d+)',
                     r'const/4 \1, 0x0',
-                    "Bypassed Frida Detection"
+                    "ข้ามระบบตรวจจับ Frida"
                 )
             ]
         )
@@ -233,17 +217,17 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                 (
                     r'(\.method [^(]*(?:getPrice|getMrp|getPro_mrp|getTotal(?:_)?Price|getOffer(?:_)?price|getSub_pack_price|getSub_actual_price|getActual_price|getDiscount(?:_)?price|getRegistration_price|getProduct_amount|getIs_locked)\(\)Ljava/lang/String;(?:(?!const-string [pv]\d+, "0")[\s\S])*?)(return-object ([pv]\d+)\n.end method)',
                     r'\1const-string \3, "0"\n\t\2',
-                    "Patch 1"
+                    "แก้แพทช์ตัวที่ 1"
                 ),
                 (
                     r'(\.method [^(]*(?:is(?:_)?Paid|getIs(?:_)?Paid|is(?:_)?purchase(?:d)?|get(?:_)?Purchase(?:d)?|getIs(?:_)?purchase(?:d)?|getPurchaseStatus|getIs_pass|getIs_pro|getIs_pro_purchased|getIs_pro_content|isOwn|isLifetime|is(?:_)?Trial)\(.*\)(?:Ljava/lang/String;|Ljava/lang/Integer;)(?:(?!const-string [pv]\d+, "1")[\s\S])*?)(return-object ([pv]\d+)\n.end method)',
                     r'\1const-string \3, "1"\n\t\2',
-                    "Patch 2"
+                    "แก้แพทช์ตัวที่ 2"
                 ),
                 (
                     r'(\.method [^(]*(?:is(?:_)?Paid|getInsIspaid|is(?:_)?purchase(?:d)?|getUser_purchase_status|getPurchaseId|is(?:_)?Trial)\(\)(?:I|Z)(?:(?!const [pv]\d+, 0x1)[\s\S])*?)(return ([pv]\d+)\n.end method)',
                     r'\1const \3, 0x1\n\t\2',
-                    "Patch 3"
+                    "แก้แพทช์ตัวที่ 3"
                 )
             ]
         )
@@ -256,22 +240,22 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                 (
                     r'(const/16 [pv]\d+, 0x)200(0\s+(.line \d+\s+)*?invoke-virtual \{[^\}]*\}, Landroid/view/Window;->(?:add|set)Flags\(II\)V)',
                     r'\1\2',
-                    "Bypassed Anti-Screen Detection <(add|set)Flags>"
+                    "ข้ามระบบตรวจจับและป้องกันแคปหน้าจอ <(add|set)Flags>"
                 ),
                 (
                     r'(invoke-static \{[^\}]*\}, L[^\(]+;->isSecuredNow\(Landroid/view/Window;\)Z\s+(.line \d+\s+)*?move-result [pv]\d+\s+(.line \d+\s+)*?const/16 ([pv]\d+),) 0x2000',
                     r'\1 0x0',
-                    "Bypassed Anti-Screen Detection <isSecuredNow>"
+                    "ข้ามระบบตรวจจับและป้องกันแคปหน้าจอ <isSecuredNow>"
                 ),
                 (
                     r'(iget [pv]\d+, [pv]\d+, Landroid/view/WindowManager\$LayoutParams;->flags:I\s+(.line \d+\s+)*?or-int/lit16 [pv]\d+, [pv]\d+,) 0x2000',
                     r'\1 0x0',
-                    "Bypassed Anti-Screen Detection <flags:I>"
+                    "ข้ามระบบตรวจจับและป้องกันแคปหน้าจอ <flags:I>"
                 ),
                 (
                     r'(invoke-virtual \{([pv]\d+), ([pv]\d+)\}, Landroid/view/SurfaceView;->setSecure\(Z\)V)',
                     r'const/4 \3, 0x0\n\n\t\1',
-                    "Bypassed Anti-Screen Detection <setSecure>"
+                    "ข้ามระบบตรวจจับและป้องกันแคปหน้าจอ <setSecure>"
                 )
             ]
         )
@@ -284,12 +268,12 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                 (
                     r'(const-string [pv]\d+, "development_settings_enabled"[^>]*invoke-static \{[^\}]*\}, L[^\(]+;->getInt\([^\)]*Ljava\/lang\/String;I\)I[^>]*)move-result ([pv]\d+)',
                     r'\1const/4 \2, 0x0',
-                    'Remove USB Debugging <development_settings_enabled>'
+                    'ลบการตรวจจับ USB Debugging <development_settings_enabled>'
                 ),
                 (
                     r'(const-string [pv]\d+, "adb_enabled"[^>]*invoke-static \{[^\}]*\}, L[^\(]+;->getInt\([^\(]*Ljava\/lang\/String;I\)I[^>]*)move-result ([pv]\d+)',
                     r'\1const/4 \2, 0x0',
-                    'Remove USB Debugging <adb_enabled>'
+                    'ลบการตรวจจับ USB Debugging <adb_enabled>'
                 )
             ]
         )
@@ -306,12 +290,12 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                 (
                     rf'{P.Match_Regex}', lambda m:
                     f'"com.Fuck.Me{(lambda x: counter.__setitem__(0, x+1) or x)(counter[0])}"',
-                    'Spoof Package Detection in Dex'
+                    'หลอกระบบตรวจสอบชื่อแพ็คเกจ (Package Detection) ในไฟล์ Dex'
                 ),
                 (
                     rf'{P.Match_Regex[1:-1]}', lambda m:
                     f'"com.Fuck.Me{(lambda x: counter.__setitem__(0, x+1) or x)(counter[0])}"',
-                    'Spoof Package Detection in Res'
+                    'หลอกระบบตรวจสอบชื่อแพ็คเกจ (Package Detection) ในไฟล์ Res'
                 )
             ]
         )
@@ -325,7 +309,7 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                 r'\1'
                 r'    const-string v0, "_Pairip_CoreX"\n'
                 r'    invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V\n',
-                f'CoreX_Hook ➸❥ {C.OG}"lib_Pairip_CoreX.so"'
+                f'CoreX_Hook -> {C.OG}"lib_Pairip_CoreX.so"'
             )
         )
 
@@ -366,7 +350,7 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
             Applied_Files = set()
 
             if description in Skip_Patch:
-                print(f"\n{C.S} Skip Patch {C.E} {C.OG}➸❥ {C.G}{description}\n")
+                print(f"\n{C.S} ข้ามการแพทช์ {C.E} {C.OG}-> {C.G}{description}\n")
 
                 continue
 
@@ -387,14 +371,14 @@ def Smali_Patch(decompile_dir, smali_folders, isAPKEditor, CA_Cert, isID, isPair
                     open(file_path, 'w', encoding='utf-8', errors='ignore').write(new_content)
 
             if Count_Applied > 0:
-                print(f"\n{C.S} Tag {C.E} {C.G}{description}")
+                print(f"\n{C.S} แท็ก {C.E} {C.G}{description}")
 
-                print(f"\n{C.S} Pattern {C.E} {C.OG}➸❥ {C.P}{pattern}")
+                print(f"\n{C.S} แพทเทิร์น {C.E} {C.OG}-> {C.P}{pattern}")
 
                 for file_path in Applied_Files:
                     print(f"{C.G}  |\n  └──── {C.CC}~{C.G}$ {C.Y}{M.os.path.basename(file_path)} {C.G} ✔")
 
                 print(
-                    f"\n{C.S} Pattern Applied {C.E} {C.OG}➸❥ {C.PN}{Count_Applied} {C.C}Time/Smali {C.G} ✔\n"
+                    f"\n{C.S} นำแพทเทิร์นไปใช้แล้ว {C.E} {C.OG}-> {C.PN}{Count_Applied} {C.C}ครั้ง/Smali {C.G} ✔\n"
                     f"\n{C_Line}\n"
                 )

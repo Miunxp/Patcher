@@ -3611,6 +3611,6 @@ class R_I:
 
         for key, value in self.selected_device.items():
             setattr(self, f"is_{key.lower()}", value)
-            print(f'{C.G}︻デ═一 {C.C}{key} {C.OG}➸❥ {C.Y}{value}')
+            print(f'{C.G}︻デ═一 {C.C}{key} {C.OG}-> {C.Y}{value}')
 
         print(f"\n{C.CC}{'_' * 61}\n\n")

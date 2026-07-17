@@ -49,7 +49,7 @@ OBoyS7CMCG66aSfs3zk4lT8fVwtFJjvkM01gH3A4q6T78rZ/Nkx01GC90Y1+xDAW
             f"{C.G}       |\n       |\n       └──── {C.CC}Input ~{C.G}#{C.Y} {', '.join(CA_Cert)} {C.G} ✔\n"
         )
 
-        print(f"\n{C.S} Write Certificate {C.E} {C.OG}➸❥ {C.Y}raw/{', '.join(addCERT)} {C.G} ✔\n")
+        print(f"\n{C.S} Write Certificate {C.E} {C.OG}-> {C.Y}raw/{', '.join(addCERT)} {C.G} ✔\n")
 
     else:
         raw_path = M.os.path.join(raw_dir, 'Techno_India.pem')
@@ -58,7 +58,7 @@ OBoyS7CMCG66aSfs3zk4lT8fVwtFJjvkM01gH3A4q6T78rZ/Nkx01GC90Y1+xDAW
 
         print(f"\n{C.S} Certificate {C.E}{C.G} The default certificate is from TechnoIndia's Modded HttpCanary... ✔\n")
 
-        print(f"\n{C.S} Write Default Certificate {C.E} {C.OG}➸❥ {C.Y}{M.os.path.basename(raw_dir)}/Techno_India.pem {C.G} ✔\n")
+        print(f"\n{C.S} Write Default Certificate {C.E} {C.OG}-> {C.Y}{M.os.path.basename(raw_dir)}/Techno_India.pem {C.G} ✔\n")
 
 
 # ---------------- Write NSC XML ----------------
@@ -119,7 +119,7 @@ def Write_NSC(decompile_dir, isAPKEditor, CA_Cert, xml_file='network_security_co
 
     open(xml_path, 'w', encoding='utf-8', errors='ignore').write(NSC_XML)
 
-    print(f"\n{C.S} Write Network Config {C.E} {C.OG}➸❥ {C.Y}{M.os.path.basename(xml_dir)}/{xml_file} {C.G} ✔\n")
+    print(f"\n{C.S} Write Network Config {C.E} {C.OG}-> {C.Y}{M.os.path.basename(xml_dir)}/{xml_file} {C.G} ✔\n")
 
     if isAPKEditor:
         update_public_xml(decompile_dir, CA_Cert)
@@ -184,4 +184,4 @@ def update_public_xml(decompile_dir, CA_Cert):
 
     open(public_xml_path, 'w', encoding='utf-8', errors='ignore').writelines(public_xml)
 
-    print(f"\n{C.S} Write New Entries {C.E} {C.OG}➸❥ {C.G}public.xml\n\n{C.OG}{''.join(new_entries).strip()}\n")
+    print(f"\n{C.S} Write New Entries {C.E} {C.OG}-> {C.G}public.xml\n\n{C.OG}{''.join(new_entries).strip()}\n")

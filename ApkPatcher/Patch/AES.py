@@ -50,7 +50,7 @@ def AES_Logs_Inject(decompile_dir, smali_folders):
                         target_smali[match].append(file_path)
 
                     print(
-                        f"\r{C.S} Total Method Signature {C.E} {C.OG}➸❥ {C.PN}{len(target_smali)}",
+                        f"\r{C.S} จำนวน Method Signature ทั้งหมด {C.E} {C.OG}-> {C.PN}{len(target_smali)}",
                         end='', flush=True
                     )
 
@@ -58,8 +58,8 @@ def AES_Logs_Inject(decompile_dir, smali_folders):
         M.shutil.rmtree(decompile_dir)
 
         exit(
-            f"{C.ERROR} No Matching Patterns found !  ✘\n"
-            f"\n{C.INFO} Sorry Bro Your Bad Luck !, Not Working MT Logs Method in This Apk, Try Another Method.\n"
+            f"{C.ERROR} ไม่พบแพทเทิร์นที่ตรงกัน !  ✘\n"
+            f"\n{C.INFO} เสียใจด้วยน้องชาย ดวงไม่ดีเลย! วิธี MT Logs ใช้ไม่ได้กับ Apk นี้ ลองใช้วิธีอื่นดูนะ\n"
         )
 
     print(f" {C.G} ✔\n\n", flush=True)
@@ -71,7 +71,7 @@ def AES_Logs_Inject(decompile_dir, smali_folders):
         if any(match in content for match in target_smali):
             matched_smali.append(file_path)
 
-        print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{len(matched_smali)}", end='', flush=True)
+        print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{len(matched_smali)}", end='', flush=True)
 
     print(f" {C.G} ✔", flush=True)
 
@@ -115,13 +115,13 @@ def AES_Logs_Inject(decompile_dir, smali_folders):
 
     for pattern, file_paths in targetSmali.items():
 
-        print(f"\n{C.S} Cipher {C.E} {C.C}Method Signature {C.OG}➸❥ {C.P}{pattern}\n")
+        print(f"\n{C.S} รหัสลับ {C.E} {C.C}Method Signature {C.OG}-> {C.P}{pattern}\n")
 
         for file_name in file_paths:
             print(f"{C.G}  |\n  └──── {C.CC}~{C.G}$ {C.Y}{file_name} {C.G} ✔")
 
         print(
-            f"\n{C.S} Pattern Applied {C.E} {C.OG}➸❥ {C.PN}{len(file_paths)} {C.C}Time/Smali {C.G} ✔\n"
+            f"\n{C.S} นำแพทเทิร์นไปใช้แล้ว {C.E} {C.OG}-> {C.PN}{len(file_paths)} {C.C}ครั้ง/Smali {C.G} ✔\n"
             f"\n{C_Line}\n"
         )
 
@@ -148,7 +148,7 @@ def AES_Logs_Inject(decompile_dir, smali_folders):
 
         if file_matches:
 
-            print(f"\n{C.S} Method Signature {C.E} {C.OG}➸❥ {C.P}{match}\n")
+            print(f"\n{C.S} Method Signature {C.E} {C.OG}-> {C.P}{match}\n")
 
             for file_path in file_matches:
                 file_name = M.os.path.basename(file_path)
@@ -156,7 +156,7 @@ def AES_Logs_Inject(decompile_dir, smali_folders):
                 print(f"{C.G}  |\n  └──── {C.CC}~{C.G}$ {C.Y}{file_name} {C.G} ✔")
 
             print(
-                f"\n{C.S} Pattern Applied {C.E} {C.OG}➸❥ {C.PN}{len(file_matches)} {C.C}Time/Smali {C.G} ✔\n"
+                f"\n{C.S} นำแพทเทิร์นไปใช้แล้ว {C.E} {C.OG}-> {C.PN}{len(file_matches)} {C.C}ครั้ง/Smali {C.G} ✔\n"
                 f"\n{C_Line}\n"
             )
 
@@ -244,7 +244,7 @@ def Copy_AES_Smali(decompile_dir, smali_folders, manifest_path, isAES_MS, isAlgo
 
         M.shutil.copy(F.Algorithm_Dex, dest_path)
 
-        print(f"\n{C.S} Generate {C.E} {C.G}{dex_name} {C.OG}➸❥ {C.Y}{M.os.path.relpath(dest_path, decompile_dir)} {C.G} ✔")
+        print(f"\n{C.S} สร้างไฟล์ {C.E} {C.G}{dex_name} {C.OG}-> {C.Y}{M.os.path.relpath(dest_path, decompile_dir)} {C.G} ✔")
 
     else:
         Target_Dest = M.os.path.join(lastSmaliFolder, "RK_TECHNO_INDIA", "AES.smali")
@@ -253,7 +253,7 @@ def Copy_AES_Smali(decompile_dir, smali_folders, manifest_path, isAES_MS, isAlgo
 
         M.shutil.copy(F.AES_Smali, Target_Dest)
 
-        print(f"\n{C.S} Generate {C.E} {C.G}AES.smali {C.OG}➸❥ {C.Y}{M.os.path.relpath(Target_Dest, decompile_dir)} {C.G} ✔")
+        print(f"\n{C.S} สร้างไฟล์ {C.E} {C.G}AES.smali {C.OG}-> {C.Y}{M.os.path.relpath(Target_Dest, decompile_dir)} {C.G} ✔")
 
 
     if not isAlgorithm:
@@ -269,7 +269,7 @@ def Copy_AES_Smali(decompile_dir, smali_folders, manifest_path, isAES_MS, isAlgo
 
         open(Target_Dest, 'w', encoding='utf-8', errors='ignore').write(Update_PKG)
 
-        print(f"{C.G}     |\n     └── {C.CC}Update Package Name ~{C.G}$ {C.OG}➸❥ {C.P}'{C.G}{PKG_Name}{C.P}' {C.G} ✔\n")
+        print(f"{C.G}     |\n     └── {C.CC}อัปเดตชื่อแพ็คเกจ (Package Name) ~{C.G}$ {C.OG}-> {C.P}'{C.G}{PKG_Name}{C.P}' {C.G} ✔\n")
 
 
 # ---------------- Regex Scan ----------------
@@ -287,7 +287,7 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock):
                     with Lock:
                         Count.value += 1
 
-                        print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count.value}", end='', flush=True)
+                        print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count.value}", end='', flush=True)
 
                 except Exception:
                     return None
@@ -295,7 +295,7 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock):
             else:
                 Count[0] += 1
 
-                print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count[0]}", end='', flush=True)
+                print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count[0]}", end='', flush=True)
 
             return Smali_Path
 
@@ -409,14 +409,14 @@ def Patch_Algorithm(smali_folders):
                     open(file_path, 'w', encoding='utf-8', errors='ignore').write(new_content)
 
             if Count_Applied > 0:
-                print(f"\n{C.S} Tag {C.E} {C.G}{description}")
+                print(f"\n{C.S} แท็ก {C.E} {C.G}{description}")
 
-                print(f"\n{C.S} Pattern {C.E} {C.OG}➸❥ {C.P}{pattern}")
+                print(f"\n{C.S} แพทเทิร์น {C.E} {C.OG}-> {C.P}{pattern}")
 
                 for file_path in Applied_Files:
                     print(f"{C.G}  |\n  └──── {C.CC}~{C.G}$ {C.Y}{M.os.path.basename(file_path)} {C.G} ✔")
 
                 print(
-                    f"\n{C.S} Pattern Applied {C.E} {C.OG}➸❥ {C.PN}{Count_Applied} {C.C}Time/Smali {C.G} ✔\n"
+                    f"\n{C.S} นำแพทเทิร์นไปใช้แล้ว {C.E} {C.OG}-> {C.PN}{Count_Applied} {C.C}ครั้ง/Smali {C.G} ✔\n"
                     f"\n{C_Line}\n"
                 )

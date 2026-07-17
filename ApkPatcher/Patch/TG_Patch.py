@@ -1,7 +1,3 @@
-# TG Patch Inspired By AbhiTheM0dder Script
-
-# Link - https://github.com/AbhiTheModder/termux-scripts/blob/main/tgpatcher.py
-
 from ..ANSI_COLORS import ANSI; C = ANSI()
 from ..MODULES import IMPORT; M = IMPORT()
 from ApkPatcher.Utils.Files_Check import FileCheck
@@ -29,12 +25,12 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock):
             try:
                 with Lock:
                     Count.value += 1
-                    print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count.value}", end='', flush=True)
+                    print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count.value}", end='', flush=True)
             except Exception:
                 return None
         else:
             Count[0] += 1
-            print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count[0]}", end='', flush=True)
+            print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count[0]}", end='', flush=True)
 
         return (Smali_Path, matched_idx)
 
@@ -330,13 +326,13 @@ def TG_Smali_Patch(decompile_dir, smali_folders, isAPKEditor):
 
         # ---------------- add setTextAndCheck_2 Method ----------------
         (
-            r'((\.method public setTextAndCheck)(\(Ljava/lang/CharSequence;ZZ\)V[\S\s]*?)(\s+return-void\n.end method\n))',
+            r'( Goldman_TextCell_Method_Regex )',
             r'\1\n\2_2\3\n'
             r'    invoke-virtual {p0}, Landroid/view/View;->getContext()Landroid/content/Context;\n'
             r'    move-result-object v1\n'
-            r'    const-string v0, "Turned off"\n'
+            r'    const-string v0, "ปิดใช้งานแล้ว"\n'
             r'    if-eqz p2, :cond_48\n'
-            r'    const-string v0, "Turned on"\n'
+            r'    const-string v0, "เปิดใช้งานแล้ว"\n'
             r'    :cond_48\n'
             r'    invoke-static {v1, v0, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;\n'
             r'    move-result-object v0\n'
@@ -360,19 +356,19 @@ def TG_Smali_Patch(decompile_dir, smali_folders, isAPKEditor):
         ),
         (
             r'sget ([pv]\d+), Lorg/telegram/messenger/R\$string;->ShowAds:I\s+(invoke-static \{.*\}, Lorg/telegram/messenger/LocaleController;->getString\(I\)Ljava/lang/String;\s+move-result-object [pv]\d+)',
-            r'const-string \1, "Do Not Delete Messages"',
+            r'const-string \1, "ห้ามลบข้อความ"',
             "Do Not Delete Messages",
             "PremiumPreviewFragment$Adapter.smali"
         ),
         (
             r'sget ([pv]\d+), Lorg/telegram/messenger/R\$string;->ShowAdsInfo:I\s+(invoke-static \{.*\}, Lorg/telegram/messenger/LocaleController;->getString\(I\)Ljava/lang/String;\s+move-result-object [pv]\d+)',
-            r'const-string \1, "After enabling or disabling the feature, ensure you revisit this page for the changes to take effect.\\nMod by Abhi"',
+            r'const-string \1, "หลังจากเปิดหรือปิดการทำงานของฟีเจอร์นี้ กรุณากลับมาหน้านี้อีกครั้งเพื่อให้การตั้งค่ามีผล.\\nพัฒนาโดย Abhi"',
             "Mod by Abhi",
             "PremiumPreviewFragment$Adapter.smali"
         ),
         (
             r'sget ([pv]\d+), Lorg/telegram/messenger/R\$string;->ShowAdsTitle:I\s+(invoke-static \{.*\}, Lorg/telegram/messenger/LocaleController;->getString\(I\)Ljava/lang/String;\s+move-result-object [pv]\d+)',
-            r'const-string \1, "Anti-Delete Messages"\n'
+            r'const-string \1, "ระบบป้องกันการลบข้อความ"\n'
             r'    invoke-virtual {v1, \1}, Lorg/telegram/ui/Cells/HeaderCell;->setText(Ljava/lang/CharSequence;)V\n'
             r'    return-void',
             "Anti-Delete Messages",
@@ -409,7 +405,7 @@ def TG_Smali_Patch(decompile_dir, smali_folders, isAPKEditor):
 
     print(f" {C.G} ✔\n", flush=True)
 
-    print(f"\n{C.X}{C.C} TG Patch, Script by {C.OG}🇮🇳 AbhiTheM0dder 🇮🇳")
+    print(f"\n{C.X}{C.C} ตัวแพทช์ TG, เขียนสคริปต์โดย {C.OG}🇮🇳 AbhiTheM0dder 🇮🇳")
 
     print(f'\n{C_Line}\n')
 
@@ -458,14 +454,14 @@ def TG_Smali_Patch(decompile_dir, smali_folders, isAPKEditor):
                 open(File_Path, 'w', encoding='utf-8', errors='ignore').write(new_content)
 
         if count_applied > 0:
-            print(f"\n{C.S} Tag {C.E} {C.G}{description}")
-            print(f"\n{C.S} Pattern {C.E} {C.OG}➸❥ {C.P}{pattern}")
+            print(f"\n{C.S} แท็ก {C.E} {C.G}{description}")
+            print(f"\n{C.S} แพทเทิร์น {C.E} {C.OG}-> {C.P}{pattern}")
 
             for File_Path in applied_files:
                 print(f"{C.G}  |\n  └──── {C.CC}~{C.G}$ {C.Y}{M.os.path.basename(File_Path)} {C.G} ✔")
 
             print(
-                f"\n{C.S} Pattern Applied {C.E} {C.OG}➸❥ {C.PN}{count_applied} {C.C}Time/Smali {C.G} ✔\n"
+                f"\n{C.S} นำแพทเทิร์นไปใช้แล้ว {C.E} {C.OG}-> {C.PN}{count_applied} {C.C}ครั้ง/Smali {C.G} ✔\n"
                 f"\n{C_Line}\n"
             )
 
@@ -487,4 +483,4 @@ def Hook_Smali(decompile_dir, isAPKEditor):
 
     M.shutil.copy(F.Hook_Smali, Target_Dest)
     
-    print(f"\n{C.S} Generate {C.E} {C.G}Hook.smali {C.OG}➸❥ {C.Y}{M.os.path.relpath(Target_Dest, decompile_dir)} {C.G} ✔\n")
+    print(f"\n{C.S} สร้างไฟล์ {C.E} {C.G}Hook.smali {C.OG}-> {C.Y}{M.os.path.relpath(Target_Dest, decompile_dir)} {C.G} ✔\n")

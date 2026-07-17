@@ -21,10 +21,10 @@ def Check_CoreX(decompile_dir, isAPKEditor):
 
         if M.os.path.isfile(M.os.path.join(lib_paths, target_file)):
 
-            Lib_CoreX.append(f"{C.G}{target_file} ➸❥ {C.P}arm64-v8a")
+            Lib_CoreX.append(f"{C.G}{target_file} -> {C.P}arm64-v8a")
 
     if Lib_CoreX:
-        print(f"{C.INFO}{C.C} Already Added {C.OG}➸❥ {f' {C.OG}& '.join(Lib_CoreX)} {C.G} ✔\n")
+        print(f"{C.INFO}{C.C} Already Added {C.OG}-> {f' {C.OG}& '.join(Lib_CoreX)} {C.G} ✔\n")
 
         return True
     return False
@@ -50,7 +50,7 @@ def Hook_Core(apk_path, decompile_dir, isAPKEditor, Package_Name):
                 with M.zipfile.ZipFile(apk_path) as zf:
                     zf.extract(base_apk)
 
-        print(f'\n{C.S} Dump {C.E} {C.G}➸❥ {C.OG}{base_apk}\n')
+        print(f'\n{C.S} Dump {C.E} {C.G}-> {C.OG}{base_apk}\n')
 
         Dump_Apk = "libFirebaseCppApp.so"
 
@@ -62,13 +62,13 @@ def Hook_Core(apk_path, decompile_dir, isAPKEditor, Package_Name):
             )
         )
 
-        print(f"\n{C.S} Arch {C.E} {C.G}➸❥ arm64-v8a\n")
+        print(f"\n{C.S} Arch {C.E} {C.G}-> arm64-v8a\n")
 
         M.shutil.move(Dump_Apk, lib_paths); M.shutil.copy(F.Pairip_CoreX, lib_paths);
 
         print(
-            f'\n{C.S} HooK {C.E} {C.G}➸❥ {C.OG}libFirebaseCppApp.so {C.G} ✔\n'
-            f'\n{C.S} HooK {C.E} {C.G}➸❥ {C.OG}lib_Pairip_CoreX.so {C.G} ✔\n'
+            f'\n{C.S} HooK {C.E} {C.G}-> {C.OG}libFirebaseCppApp.so {C.G} ✔\n'
+            f'\n{C.S} HooK {C.E} {C.G}-> {C.OG}lib_Pairip_CoreX.so {C.G} ✔\n'
         )
 
         return True

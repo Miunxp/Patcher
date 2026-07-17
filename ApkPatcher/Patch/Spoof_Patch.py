@@ -63,7 +63,7 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock):
                     with Lock:
                         Count.value += 1
 
-                        print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count.value}", end='', flush=True)
+                        print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count.value}", end='', flush=True)
 
                 except Exception:
                     return None
@@ -71,7 +71,7 @@ def Regex_Scan(Smali_Path, Target_Regex, Count, Lock):
             else:
                 Count[0] += 1
 
-                print(f"\r{C.S} Find Target Smali {C.E} {C.OG}➸❥ {C.PN}{Count[0]}", end='', flush=True)
+                print(f"\r{C.S} พบ Smali เป้าหมาย {C.E} {C.OG}-> {C.PN}{Count[0]}", end='', flush=True)
 
             return Smali_Path
 
@@ -88,140 +88,140 @@ def Patch_Random_Info(smali_folders, isID):
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->MANUFACTURER:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_manufacturer}"',
-            f"MANUFACTURER ➸❥ {C.OG}{RI.is_manufacturer}"
+            f"MANUFACTURER -> {C.OG}{RI.is_manufacturer}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->BRAND:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_brand}"',
-            f"BRAND ➸❥ {C.OG}{RI.is_brand}"
+            f"BRAND -> {C.OG}{RI.is_brand}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->MODEL:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_model}"',
-            f"MODEL ➸❥ {C.OG}{RI.is_model}"
+            f"MODEL -> {C.OG}{RI.is_model}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->PRODUCT:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_product}"',
-            f"PRODUCT ➸❥ {C.OG}{RI.is_product}"
+            f"PRODUCT -> {C.OG}{RI.is_product}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->DEVICE:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_device}"',
-            f"DEVICE ➸❥ {C.OG}{RI.is_device}"
+            f"DEVICE -> {C.OG}{RI.is_device}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->BOARD:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_board}"',
-            f"BOARD ➸❥ {C.OG}{RI.is_board}"
+            f"BOARD -> {C.OG}{RI.is_board}"
         ),
         (
             r'invoke-static \{\}, Landroid/os/Build;->getRadioVersion\(\)Ljava/lang/String;[^>]*?move-result-object ([pv]\d+)',
             rf'const-string \1, "Unknown"',
-            f"getRadioVersion ➸❥ {C.OG}Unknown"
+            f"getRadioVersion -> {C.OG}Unknown"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->RADIO:Ljava/lang/String;',
             rf'const-string \1, "Unknown"',
-            f"RADIO ➸❥ {C.OG}Unknown"
+            f"RADIO -> {C.OG}Unknown"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->HARDWARE:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_hardware}"',
-            f"HARDWARE ➸❥ {C.OG}{RI.is_hardware}"
+            f"HARDWARE -> {C.OG}{RI.is_hardware}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->BOOTLOADER:Ljava/lang/String;',
             rf'const-string \1, "Unknown"',
-            f"BOOTLOADER ➸❥ {C.OG}Unknown"
+            f"BOOTLOADER -> {C.OG}Unknown"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->FINGERPRINT:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_fingerprint}"',
-            f"FINGERPRINT ➸❥ {C.OG}{RI.is_fingerprint}"
+            f"FINGERPRINT -> {C.OG}{RI.is_fingerprint}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->ID:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_id}"',
-            f"ID ➸❥ {C.OG}{RI.is_id}"
+            f"ID -> {C.OG}{RI.is_id}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->SERIAL:Ljava/lang/String;',
             rf'const-string \1, "Unknown"',
-            f"SERIAL ➸❥ {C.OG}Unknown"
+            f"SERIAL -> {C.OG}Unknown"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->DISPLAY:Ljava/lang/String;',
             rf'const-string \1, "{RI.is_display}"',
-            f"DISPLAY ➸❥ {C.OG}{RI.is_display}"
+            f"DISPLAY -> {C.OG}{RI.is_display}"
         ),
         (
             r'sget-object ([pv]\d+), Landroid/os/Build;->HOST:Ljava/lang/String;',
             rf'const-string \1, "localhost"',
-            f"HOST ➸❥ {C.OG}localhost"
+            f"HOST -> {C.OG}localhost"
         ),
         (
             r'const-string [pv]\d+, "(?:generic|goldfish)"[^>]*?invoke-static \{[^\}]*\}, Landroid/os/Build;->get(?:Device|Hardware)\(\)Ljava/lang/String;[^>]*?move-result-object [pv]\d+[^>]*?invoke-virtual \{[^\}]*\}, Ljava/lang/String;->contains\(Ljava/lang/CharSequence;\)Z[^>]*?move-result ([pv]\d+)',
             rf'const/4 \1, 0x0',
-            "Bypassed Device detection"
+            "ข้ามระบบตรวจจับอุปกรณ์ (Device detection)"
         ),
 
         # ---------------- Mock Location & Update & PKG Install Fixed ----------------
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/location/Location;->getLongitude\(\)D[^>]*?)move-result-wide ([pv]\d+)',
             rf'\1const-wide \2, {lon_hex}',
-            f"Longitude ➸❥ {C.OG}{lon_hex}"
+            f"Longitude -> {C.OG}{lon_hex}"
         ),
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/location/Location;->getLatitude\(\)D[^>]*?)move-result-wide ([pv]\d+)',
             rf'\1const-wide \2, {lat_hex}',
-            f"Latitude ➸❥ {C.OG}{lat_hex}"
+            f"Latitude -> {C.OG}{lat_hex}"
         ),
         (
             r'invoke-virtual \{[^\}]*\}, Landroid/location/Location;->(?:isFromMockProvider|isMock)\(\)Z[^>]*?move-result ([pv]\d+)',
             rf'const/4 \1, 0x0',
-            "Bypassed Mock Detection"
+            "ข้ามระบบตรวจจับตำแหน่งจำลอง (Mock Detection)"
         ),
         (
             r'iget-object ([pv]\d+), [pv]\d+, L[^;]*;->ip:Ljava/lang/String;',
             rf'const-string \1, "127.0.0.1"',
-            f"IP To LocalHost ➸❥ {C.OG}127.0.0.1"
+            f"เปลี่ยน IP เป็น LocalHost -> {C.OG}127.0.0.1"
         ),
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/content/pm/PackageManager;->getInstallerPackageName\(Ljava/lang/String;\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             r'\1const-string \2, "com.android.vending"',
-            "Fixed Installer"
+            "แก้ไขตัวติดตั้งระบบ (Installer)"
         ),
 
         # ---------------- Settings$Secure ----------------
         (
             r'(const-string [pv]\d+, "bluetooth_address"[^>]*?invoke-static \{[^\}]*\}, Landroid/provider/Settings\$Secure;->getString\(Landroid/content/ContentResolver;Ljava/lang/String;\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             rf'\1const-string \2, "{isMac1}"',
-            f"Bluetooth Address ➸❥ {C.OG}{isMac1}"
+            f"ที่อยู่บลูทูธ (Bluetooth Address) -> {C.OG}{isMac1}"
         ),
 
         # ---------------- Network Info ----------------
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/net/wifi/WifiInfo;->getBSSID\(\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             rf'\1const-string \2, "{isMac2}"',
-            f"WifiInfo BSSID ➸❥ {C.OG}{isMac2}"
+            f"WifiInfo BSSID -> {C.OG}{isMac2}"
         ),
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/net/wifi/WifiInfo;->getMacAddress\(\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             rf'\1const-string \2, "{isMac3}"',
-            f"WifiInfo MacAddress ➸❥ {C.OG}{isMac3}"
+            f"WifiInfo MacAddress -> {C.OG}{isMac3}"
         ),
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/bluetooth/BluetoothDevice;->getAddress\(\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             rf'\1const-string \2, "{isMac4}"',
-            f"BluetoothDevice Address ➸❥ {C.OG}{isMac4}"
+            f"BluetoothDevice Address -> {C.OG}{isMac4}"
         ),
 
         # ---------------- Telephony Manager ----------------
         (
             r'(invoke-virtual \{[^\}]*\}, Landroid/telephony/TelephonyManager;->getDeviceId\(\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
             rf'\1const-string \2, "{isIMEI}"',
-            f"IMEI NO (Device ID) ➸❥ {C.OG}{isIMEI}"
+            f"หมายเลข IMEI (Device ID) -> {C.OG}{isIMEI}"
         ),
 
         # ---------------- Fix Play ----------------
@@ -253,7 +253,7 @@ def Patch_Random_Info(smali_folders, isID):
             (
                 r'(const-string [pv]\d+, "android_id"[^>]*?invoke-static \{[^\}]*\}, Landroid/provider/Settings\$Secure;->getString\(Landroid/content/ContentResolver;Ljava/lang/String;\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
                 rf'\1const-string \2, "{isID}"',
-                f"Custom Android ID ➸❥ {C.OG}{isID}"
+                f"กำหนดรหัส Android ID เอง -> {C.OG}{isID}"
             )
         )
     else:
@@ -261,7 +261,7 @@ def Patch_Random_Info(smali_folders, isID):
             (
                 r'(const-string [pv]\d+, "android_id"[^>]*?invoke-static \{[^\}]*\}, Landroid/provider/Settings\$Secure;->getString\(Landroid/content/ContentResolver;Ljava/lang/String;\)Ljava/lang/String;[^>]*?)move-result-object ([pv]\d+)',
                 rf'\1const-string \2, "{device_id}"',
-                f"Random Android ID ➸❥ {C.OG}{device_id}"
+                f"สุ่มรหัส Android ID -> {C.OG}{device_id}"
             )
         )
 
@@ -315,14 +315,14 @@ def Patch_Random_Info(smali_folders, isID):
                     open(file_path, 'w', encoding='utf-8', errors='ignore').write(new_content)
 
             if Count_Applied > 0:
-                print(f"\n{C.S} Tag {C.E} {C.G}{description}")
+                print(f"\n{C.S} แท็ก {C.E} {C.G}{description}")
 
-                print(f"\n{C.S} Pattern {C.E} {C.OG}➸❥ {C.P}{pattern}")
+                print(f"\n{C.S} แพทเทิร์น {C.E} {C.OG}-> {C.P}{pattern}")
 
                 for file_path in Applied_Files:
                     print(f"{C.G}  |\n  └──── {C.CC}~{C.G}$ {C.Y}{M.os.path.basename(file_path)} {C.G} ✔")
 
                 print(
-                    f"\n{C.S} Pattern Applied {C.E} {C.OG}➸❥ {C.PN}{Count_Applied} {C.C}Time/Smali {C.G} ✔\n"
+                    f"\n{C.S} นำแพทเทิร์นไปใช้แล้ว {C.E} {C.OG}-> {C.PN}{Count_Applied} {C.C}ครั้ง/Smali {C.G} ✔\n"
                     f"\n{C_Line}\n"
                 )

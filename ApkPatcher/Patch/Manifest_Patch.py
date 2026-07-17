@@ -53,7 +53,7 @@ def Fix_Manifest(manifest_path, isPKG, isPine_Hook, Package_Name):
         if new_content != content:
             print(
                 f"\n{C.S} Tag {C.E} {C.OG}{description}\n"
-                f"\n{C.S} Applying Pattern {C.E} {C.OG}➸❥ {C.P}{pattern}\n"
+                f"\n{C.S} Applying Pattern {C.E} {C.OG}-> {C.P}{pattern}\n"
                 f"{C.G}  |\n  └──── {C.CC}Patch Cleaned Up ~{C.G}$  {C.P}'{C.G}{M.os.path.basename(manifest_path)}{C.P}' {C.G} ✔\n"
             )
 
@@ -83,9 +83,9 @@ def Patch_Manifest(decompile_dir, manifest_path):
 
     open(manifest_path, 'w', encoding='utf-8', errors='ignore').write(content)
 
-    print(f'\n{C.S} Updated {C.E}{C.C} android:networkSecurityConfig={C.P}"{C.G}@xml/network_security_config{C.P}" {C.OG}➸❥ {C.Y}{M.os.path.basename(manifest_path)} {C.G} ✔\n')
+    print(f'\n{C.S} Updated {C.E}{C.C} android:networkSecurityConfig={C.P}"{C.G}@xml/network_security_config{C.P}" {C.OG}-> {C.Y}{M.os.path.basename(manifest_path)} {C.G} ✔\n')
 
-    print(f'\n{C.S} Updated {C.E}{C.C} android:usesCleartextTraffic={C.P}"{C.G}true{C.P}" {C.OG}➸❥ {C.Y}{M.os.path.basename(manifest_path)} {C.G} ✔\n')
+    print(f'\n{C.S} Updated {C.E}{C.C} android:usesCleartextTraffic={C.P}"{C.G}true{C.P}" {C.OG}-> {C.Y}{M.os.path.basename(manifest_path)} {C.G} ✔\n')
 
 
 # ---------------- Permission Manifest ----------------
@@ -133,7 +133,7 @@ def Permission_Manifest(decompile_dir, manifest_path, isAPKEditor):
         
     open(manifest_path, 'w', encoding='utf-8', errors='ignore').write(content)
         
-    print(f"\n{C.S} Storage Permission {C.E} {C.OG}➸❥ {C.P}'{C.G}AndroidManifest.xml{C.P}' {C.G} ✔\n")
+    print(f"\n{C.S} Storage Permission {C.E} {C.OG}-> {C.P}'{C.G}AndroidManifest.xml{C.P}' {C.G} ✔\n")
 
     if not isAPKEditor:
         yml = open(A_Y_P, 'r', encoding='utf-8', errors='ignore').read()
@@ -146,7 +146,7 @@ def Permission_Manifest(decompile_dir, manifest_path, isAPKEditor):
 
         open(A_Y_P, 'w', encoding='utf-8', errors='ignore').write(update_yml)
 
-        print(f"\n{C.S} targetSdkVersion {C.E} {C.PN}28 {C.OG}➸❥{C.G} apktool.yml\n")
+        print(f"\n{C.S} targetSdkVersion {C.E} {C.PN}28 {C.OG}->{C.G} apktool.yml\n")
 
 
 # ---------------- Pine Hook ----------------
